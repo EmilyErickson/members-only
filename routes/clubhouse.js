@@ -8,6 +8,6 @@ const message_controller = require("../controllers/messageController");
 router.get("/", message_controller.index);
 
 //Get request for creating a user
-router.get("/clubhouse/sign-up", user_controller.user_create_get);
+router.get("/sign-up", user_controller.user_create_get);
 
 module.exports = router;
