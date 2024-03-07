@@ -15,14 +15,6 @@ const clubhouseRouter = require("./routes/clubhouse");
 
 const app = express();
 
-const RateLimit = require("express-rate-limit");
-const limiter = RateLimit({
-  windowMs: 1 * 10 * 1000, // 10 seconds
-  max: 10,
-});
-// Apply rate limiter to all requests
-app.use(limiter);
-
 const mongoDb = process.env.MONGO_DB_URL;
 mongoose.connect(mongoDb);
 const db = mongoose.connection;
