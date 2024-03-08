@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login user</title>
+</head>
+<body>
+    <h1>Login to the Clubhouse</h1>
+
+    <% if (typeof message !== 'undefined' && message !== null) { %>
+        <p style="color: rgb(184, 0, 0);"><%= message %></p>
+    <% } %>
+
+    <form method="post" action="">
+        <label>Username: <input type="text" name="username" required></label><br>
+        <label>Password: <input type="password" name="password" required></label><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
