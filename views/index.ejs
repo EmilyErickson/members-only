@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-<body>
-  <h1><%= title %></h1>
-  <p>Hello World!</p>
-  <ul>
-    <% allMessages.forEach(message => { %>
-      <li><%= message.text %></li>
-    <% }); %>
-  </ul>
-    <a href='/clubhouse/sign-up'>Sign Up</a>
-</body>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body>
 </html>

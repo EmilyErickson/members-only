@@ -4,12 +4,5 @@ body {
 }
 
 a {
-  color: #1b635e;
-}
-
-.sign-up-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
+  color: #00B7FF;
 }
