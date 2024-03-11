@@ -5,7 +5,47 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header>
+      <%- include('./partials/header'); %>
+    </header>
+    
+    <main>
+      <h1><%= title %></h1>
+      <% if (!currentUser) { %>
+        <p>Welcome to the Clubhouse!</p>
+      <% } else { %>
+        <p>Welcome <%= currentUser %>!</p>
+      <% } %>
+
+      <% if (!currentUser || currentUser.isMember !== true) { %>
+        <!-- Loop through allMessages and display each message without name or date -->
+        <% allMessages.forEach(function(message) { %>
+          <div class="message">
+            <h3><%= message.title %></h3>
+            <p><%= message.text %></p>
+          </div>
+        <% }); %>
+
+        <!-- Display become member button -->
+        <button>Become a Member</button>
+      <% } else if (currentUser.isMember === true && currentUser.isAdmin === true) { %>
+        <!-- Loop through allMessages and display each message with author name, date and a delete button -->
+        <% allMessages.forEach(function(message) { %>
+          <p><%= message.author %> - <%= message.date %>: <%= message.content %> <button>Delete</button></p>
+        <% }); %>
+
+        <!-- Display add message button -->
+        <button>Add Message</button>
+      <% } else if (currentUser.isMember === true) { %>
+        <!-- Loop through allMessages and display each message with author name, date -->
+        <% allMessages.forEach(function(message) { %>
+          <p><%= message.author %> - <%= message.date %>: <%= message.content %></p>
+        <% }); %>
+      <% } %>
+
+    </main>
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>    
   </body>
 </html>
