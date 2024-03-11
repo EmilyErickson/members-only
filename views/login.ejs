@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header'); %>
+    </header>
+    <main>
+      <h1><%= title %></h1>
+
+      <form action="" method="post">
+
+        <label for="email">Email
+          <input type="email" id="email" name="email">
+        </label>
+
+        <label for="password">Password
+          <input type="password" id="password" name="password">
+        </label>
+
+        <button class="form-submit" type="submit">Login</button>
+      </form>
+
+      <% if (typeof errors !== 'undefined') { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+            <li><%= error.title %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+
+    </main>
+
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>    
+  </body>
+</html>
