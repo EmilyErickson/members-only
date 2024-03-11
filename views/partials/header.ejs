@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <a class="navbar-brand" href="/">EJS Is Fun</a>
+    <ul class="navbar-nav">
+        <% if (!currentUser) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sign-up">Sign Up</a>
+            </li>
+        <% } else if (!currentUser.isMember) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/membership">Become a Member</a>
+            </li>
+        <% } else if (!currentUser.isAdmin) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Become an Admin</a>
+            </li>
+        <% } %>
+    </ul>
+</nav>
