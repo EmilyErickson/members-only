@@ -9,8 +9,6 @@ const userSchema = new mongoose.Schema({
   isAdmin: { type: Boolean, default: false },
 });
 
-userSchema.index({ email: 1 }, { unique: true });
-
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
