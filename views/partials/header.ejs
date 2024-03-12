@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <a class="navbar-brand" href="/">EJS Is Fun</a>
+    <a class="navbar-brand" href="/">Clubhouse</a>
     <ul class="navbar-nav">
         <% if (!currentUser) { %>
             <li class="nav-item">
@@ -10,11 +10,30 @@
             </li>
         <% } else if (!currentUser.isMember) { %>
             <li class="nav-item">
+                <a class="nav-link" href="/create-message">Create new message</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/membership">Become a Member</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         <% } else if (!currentUser.isAdmin) { %>
             <li class="nav-item">
+                <a class="nav-link" href="/create-message">Create new message</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/admin">Become an Admin</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        <% } else if (currentUser.isAdmin) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-message">Create new message</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         <% } %>
     </ul>
