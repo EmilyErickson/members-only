@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header'); %>
+    </header>
+    <main>
+      <h1><%= title %></h1>
+        <h3 class="riddle">Enter the correct password to become an admin</h3>
+      <form action="" method="post">
+        <label for="adminkey">Password:
+          <input type="adminkey" id="adminkey" name="adminkey">
+        </label>
+
+        <button class="form-submit" type="submit">Submit</button>
+      </form>
+
+      <% if (typeof errors !== 'undefined') { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+            <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </main>
+
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>    
+  </body>
+</html>
