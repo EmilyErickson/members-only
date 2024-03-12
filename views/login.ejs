@@ -14,7 +14,7 @@
       <form action="" method="post">
 
         <label for="email">Email
-          <input type="email" id="email" name="email">
+          <input type="email" id="email" name="username">
         </label>
 
         <label for="password">Password
@@ -27,7 +27,7 @@
       <% if (typeof errors !== 'undefined') { %>
         <ul>
           <% errors.forEach(function(error) { %>
-            <li><%= error.title %></li>
+            <li><%= error.message %></li>
           <% }); %>
         </ul>
       <% } %>
