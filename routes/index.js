@@ -4,6 +4,8 @@ const controller = require("../controllers/controller");
 
 router.get("/", controller.index);
 
+router.get("/logout", controller.logout);
+
 router.get("/sign-up", controller.signUp_create_get);
 router.post("/sign-up", controller.signUp_create_post);
 
