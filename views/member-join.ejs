@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header'); %>
+    </header>
+    <main>
+      <h1><%= title %></h1>
+        <h3 class="riddle">Enter the correct answer to become a member</h3>
+      <form action="" method="post">
+        <p>What gets wet while drying?</p>
+        <label for="memberkey">Answer:
+          <input type="memberkey" id="memberkey" name="memberkey">
+        </label>
+
+        <button class="form-submit" type="submit">Submit</button>
+      </form>
+
+      <% if (typeof errors !== 'undefined') { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+            <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </main>
+
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>    
+  </body>
+</html>
