@@ -14,35 +14,39 @@
       <% if (!currentUser) { %>
         <p>Welcome to the Clubhouse!</p>
       <% } else { %>
-        <p>Welcome <%= currentUser %>!</p>
+        <p>Welcome <strong><%= `${currentUser.firstName}  ${currentUser.lastName}` %>!</strong></p>
+      <% } %>
+
+      <% if (!allMessages) { %>
+      <p>There are no messages</p>
       <% } %>
 
       <% if (!currentUser || currentUser.isMember !== true) { %>
-        <!-- Loop through allMessages and display each message without name or date -->
         <% allMessages.forEach(function(message) { %>
           <div class="message">
             <h3><%= message.title %></h3>
             <p><%= message.text %></p>
           </div>
         <% }); %>
-
-        <!-- Display become member button -->
-        <button>Become a Member</button>
       <% } else if (currentUser.isMember === true && currentUser.isAdmin === true) { %>
-        <!-- Loop through allMessages and display each message with author name, date and a delete button -->
         <% allMessages.forEach(function(message) { %>
-          <p><%= message.author %> - <%= message.date %>: <%= message.content %> <button>Delete</button></p>
+          <div class="message">
+            <h3><%= message.title %></h3>
+            <p><%= message.text %></p>
+            <p><%= message.author %> - <%= message.date %></p>
+            <button>Delete</button>
+          </div>
         <% }); %>
 
-        <!-- Display add message button -->
-        <button>Add Message</button>
-      <% } else if (currentUser.isMember === true) { %>
-        <!-- Loop through allMessages and display each message with author name, date -->
+        <% } else if (currentUser.isMember === true) { %>
         <% allMessages.forEach(function(message) { %>
-          <p><%= message.author %> - <%= message.date %>: <%= message.content %></p>
-        <% }); %>
+          <div class="message">
+            <h3><%= message.title %></h3>
+            <p><%= message.text %></p>
+            <p><%= message.author %> - <%= message.date %></p>
+          </div>        
+          <% }); %>
       <% } %>
-
     </main>
     <footer>
       <%- include('./partials/footer'); %>
