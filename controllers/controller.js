@@ -1,4 +1,5 @@
 const passport = require("passport");
+require("dotenv").config();
 
 const User = require("../models/users");
 const Message = require("../models/messages");
@@ -21,6 +22,15 @@ exports.index = asyncHandler(async (req, res, next) => {
     allMessages: allMessages,
   });
 });
+
+exports.logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
 
 exports.signUp_create_get = (req, res) => {
   res.render("signup", {
@@ -90,31 +100,104 @@ exports.login_create_post = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      console.log("no user");
-      return res.redirect("/login");
+      return res.render("login", {
+        title: "Login",
+        errors: [info], // Pass error message to view
+      });
     }
     req.logIn(user, (err) => {
-      console.log(user);
+      req.session.currentUser = user;
       if (err) {
         return next(err);
       }
+
       return res.redirect("/");
     });
   })(req, res, next);
 };
 
 exports.member_create_get = (req, res) => {
-  // Implement your membership get route logic here
+  res.render("member-join", {
+    title: "Become a Member",
+  });
 };
 
-exports.member_create_post = (req, res) => {
-  // Implement your membership post route logic here
-};
+exports.member_create_post = [
+  body("memberkey")
+    .custom((value, { req }) => {
+      if (value !== process.env.MEMBERSHIP_KEY) {
+        throw new Error("Incorrect Answer");
+      }
+      return true;
+    })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("member-join", {
+        title: "Membership",
+        errors: errors.array(),
+      });
+    } else {
+      if (!req.user) {
+        return res.redirect("/login");
+      }
+
+      const currentUser = await User.findById(req.user._id);
+
+      if (!currentUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      // Update the user's membership status
+      currentUser.isMember = true;
+      await currentUser.save();
+
+      res.redirect("/");
+    }
+  }),
+];
 
 exports.admin_create_get = (req, res) => {
-  // Implement your admin get route logic here
+  res.render("admin-join", {
+    title: "Admin",
+  });
 };
 
-exports.admin_create_post = (req, res) => {
-  // Implement your admin post route logic here
-};
+exports.admin_create_post = [
+  body("adminkey")
+    .custom((value, { req }) => {
+      if (value !== process.env.ADMIN_KEY) {
+        throw new Error("Incorrect Password");
+      }
+      return true;
+    })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("admin-join", {
+        title: "Admin",
+        errors: errors.array(),
+      });
+    } else {
+      if (!req.user) {
+        return res.redirect("/login");
+      }
+
+      const currentUser = await User.findById(req.user._id);
+
+      if (!currentUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      // Update the user's membership status
+      currentUser.isAdmin = true;
+      await currentUser.save();
+
+      res.redirect("/");
+    }
+  }),
+];
