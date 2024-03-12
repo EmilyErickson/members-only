@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header'); %>
+    </header>
+    
+    <main>
+      <h1><%= title %></h1>
+
+      <form action="" method="post">
+
+          <label for="title">First Name
+          <input type="text" id="title" name="title"></label>
+
+          <label for="messagetext">Last Name
+          <textarea type="text" id="messagetext" name="messagetext"></label>
+
+        <button class="form-submit" type="submit">Submit</button>
+      </form>
+
+      <% if (typeof errors !== 'undefined') { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+            <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+
+    </main>
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>    
+  </body>
+</html>
