@@ -18,4 +18,7 @@ router.post("/membership", controller.member_create_post);
 router.get("/admin", controller.admin_create_get);
 router.post("/admin", controller.admin_create_post);
 
+router.get("/create-message", controller.message_create_get);
+router.post("/create-message", controller.message_create_post);
+
 module.exports = router;
