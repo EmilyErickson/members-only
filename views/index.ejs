@@ -12,45 +12,47 @@
     <main>
       <h1><%= title %></h1>
       <% if (!currentUser) { %>
-        <p>Welcome to the Clubhouse!</p>
+        <h3>Welcome to the Clubhouse!</h3>
       <% } else { %>
-        <p>Welcome <strong><%= `${currentUser.firstName}  ${currentUser.lastName}` %>!</strong></p>
+        <h3>Welcome <strong><%= `${currentUser.firstName}  ${currentUser.lastName}` %>!</strong></h3>
       <% } %>
 
-      <% if (!allMessages) { %>
-      <p>There are no messages</p>
+      <% if (!allMessages || allMessages.length === 0) { %>
+      <p>There are no posts</p>
       <% } %>
 
-      <% if (!currentUser || currentUser.isMember !== true) { %>
-        <% allMessages.forEach(function(message) { %>
-          <div class="message">
-            <h3>Title: <%= message.title %></h3>
-            <p>Message: <%= message.text %></p>
-            <p>Sign in to see message author and date</p>
-          </div>
-        <% }); %>
-      <% } else if (currentUser.isMember === true && currentUser.isAdmin === true) { %>
-        <% allMessages.forEach(function(message) { %>
-          <div class="message">
-            <h3>Title: <%= message.title %></h3>
-            <p>Message: <%= message.text %></p>
-            <p>Author: <%= `${message.user.firstName}  ${message.user.lastName}` %></p>
-            <p class="timestamp"><%= message.timestamp %></p>
-            <p><%= message %></p>
-            <button>Delete</button>
-          </div>
-        <% }); %>
+      <div class="message-container">
 
-        <% } else if (currentUser.isMember === true) { %>
-        <% allMessages.forEach(function(message) { %>
-          <div class="message">
-            <h3>Title: <%= message.title %></h3>
-            <p>Message: <%= message.text %></p>
-            <p>Author: <%= `${message.user.firstName}  ${message.user.lastName}` %></p>
-            <p class="timestamp"><%= message.timestamp %></p>
-          </div>        
+        <% if (!currentUser || currentUser.isMember !== true) { %>
+          <% allMessages.forEach(function(message) { %>
+            <div class="message">
+              <h3>Title: <%= message.title %></h3>
+              <p>Message: <%= message.text %></p>
+              <p>Sign in to see post author and date</p>
+            </div>
           <% }); %>
-      <% } %>
+        <% } else if (currentUser.isMember === true && currentUser.isAdmin === true) { %>
+          <% allMessages.forEach(function(message) { %>
+            <div class="message">
+              <h3>Title: <%= message.title %></h3>
+              <p>Message: <%= message.text %></p>
+              <p>Author: <%= `${message.user.firstName}  ${message.user.lastName}` %></p>
+              <p class="timestamp"><%= message.timestamp %></p>
+              <button class="delete"><a href="/delete/<%= message._id %>">Delete</a></button>
+            </div>
+          <% }); %>
+
+          <% } else if (currentUser.isMember === true) { %>
+          <% allMessages.forEach(function(message) { %>
+            <div class="message">
+              <h3>Title: <%= message.title %></h3>
+              <p>Message: <%= message.text %></p>
+              <p>Author: <%= `${message.user.firstName}  ${message.user.lastName}` %></p>
+              <p class="timestamp"><%= message.timestamp %></p>
+            </div>        
+            <% }); %>
+        <% } %>
+      </div>
     </main>
     <footer>
       <%- include('./partials/footer'); %>
