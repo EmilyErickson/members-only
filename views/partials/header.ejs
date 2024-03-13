@@ -10,29 +10,29 @@
             </li>
         <% } else if (!currentUser.isMember) { %>
             <li class="nav-item">
-                <a class="nav-link" href="/create-message">Create new message</a>
+                <a class="nav-link" href="/create-message">Create message</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/membership">Become a Member</a>
+                <a class="nav-link" href="/membership">Become Member</a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
         <% } else if (!currentUser.isAdmin) { %>
             <li class="nav-item">
-                <a class="nav-link" href="/create-message">Create new message</a>
+                <a class="nav-link" href="/create-message">Create message</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin">Become an Admin</a>
+                <a class="nav-link" href="/admin">Become Admin</a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
         <% } else if (currentUser.isAdmin) { %>
             <li class="nav-item">
-                <a class="nav-link" href="/create-message">Create new message</a>
+                <a class="nav-link" href="/create-message">Create message</a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
         <% } %>
