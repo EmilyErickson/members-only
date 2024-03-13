@@ -28,7 +28,7 @@
             <div class="message">
               <h3>Title: <%= message.title %></h3>
               <p>Message: <%= message.text %></p>
-              <p>Sign in to see post author and date</p>
+              <p>Sign in or become a member to see post author and date</p>
             </div>
           <% }); %>
         <% } else if (currentUser.isMember === true && currentUser.isAdmin === true) { %>
