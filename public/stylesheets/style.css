@@ -1,6 +1,16 @@
 body {
   margin: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+  text-shadow: .5px 1px .25px rgb(73, 73, 73);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  height: 2.5rem;
 }
 
 a {
@@ -10,14 +20,14 @@ a {
 
 main {
   margin: 50px;
+  flex: 1;
 }
 
 .navbar {
   background-color: lightcyan;
   display: grid;
-  /* justify-items: center; */
   align-items: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 3fr;
   margin: 0;
 }
 
@@ -27,26 +37,41 @@ main {
   list-style: none;
 }
 
-.navbar-brand {
-  color: rgb(0, 0, 0);
-  padding: 12px;
+.nav-item {
+  background-color: inherit;
+  border-radius: 5px;
+  padding: 2px;
+  transition: all .5s ease-in-out;
 }
 
-.footer{
-  position: absolute;
-  /* bottom: 0; */
-  width: 100%;
-  height: 2.5rem;
-  background-color: aquamarine;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
+.nav-item:hover {
+  background-color: #abcdef;
+  border-radius: 8px;
+  padding: 3px;
 }
+
+.navbar-brand {
+  background-color: inherit;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  width: fit-content;
+  transition: all .5s ease-in-out;
+}
+
+.navbar-brand:hover {
+  background-color: #abdcef;
+  border-radius: 8px;
+  padding: 8px;
+}
+
 
 .message {
   border: 2px solid black;
+  display: grid;
+  grid-template-rows: 1fr 2fr .5fr .4fr;
+  justify-content: center;
+  padding: 8px;
 }
 
 form {
@@ -54,27 +79,81 @@ form {
   grid-template-columns: repeat(1fr, 6);
   width: 20rem;
   gap: 5px;
-  border: 2px solid green;
+  border: 2px solid black;
   justify-content: center;
-  padding: 2px;
+  padding: 1rem 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  text-shadow: none;
 }
 
-input {
+input, textarea {
   display: flex;
   width: 15rem;
   height: 1.2rem;
 }
 
+/* button {
+  height: 1rem;
+  background-color: lightcyan;
+  border: .2px solid black;
+  border-radius: 5px;
+  transition: all .5s ease-in-out;
+}
+
+button:hover {
+  background-color: #abcdef;
+  border-radius: 8px;
+  border: none;
+  padding: 3px;
+} */
+
 .form-submit {
-  height: 2rem;
+  height: 1.2rem;
   width: 5rem;
   place-self: center;
-  font-size: 14px;
-  transition: all .25s ease-in-out;
+  background-color: lightcyan;
+  border: .2px solid black;
+  border-radius: 5px;
+  transition: all .5s ease-in-out;
 }
 
 .form-submit:hover {
   height: 2rem;
   width: 5.2rem;
+  font-size: 16px;
+  background-color: #abcdef;
+  border-radius: 8px;
+  border: none;
+  padding: 3px;
+}
+
+.footer{
+  position: static;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  background-color: lightcyan;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer > a {
+  color: inherit;
+  transition: all .5s ease-in-out;
+}
+/* 
+.nav-item {
+  background-color: inherit;
+  border-radius: 5px;
+  padding: 2px;
+  transition: all .5s ease-in-out;
+} */
+
+.footer > a:hover {
+  color: #00172e;
   font-size: 16px;
 }
