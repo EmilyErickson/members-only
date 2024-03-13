@@ -18,13 +18,8 @@ a {
   text-decoration: none;
 }
 
-main {
-  margin: 50px;
-  flex: 1;
-}
-
 .navbar {
-  background-color: lightcyan;
+  background-color: #FAEBD7;
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 3fr;
@@ -45,7 +40,7 @@ main {
 }
 
 .nav-item:hover {
-  background-color: #abcdef;
+  background-color: #daaf78;
   border-radius: 8px;
   padding: 3px;
 }
@@ -60,18 +55,60 @@ main {
 }
 
 .navbar-brand:hover {
-  background-color: #abdcef;
+  background-color: #daaf78;
   border-radius: 8px;
   padding: 8px;
 }
 
+main {
+  background-color: rgb(248, 248, 248);
+  padding: 20px;
+  flex: 1;
+}
+
+.message-container {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+  gap: 5px;
+  margin: 0;
+}
+
+
 
 .message {
-  border: 2px solid black;
+  border: 2px solid rgb(0, 0, 0);
   display: grid;
-  grid-template-rows: 1fr 2fr .5fr .4fr;
+  grid-template-rows: .75fr 1.5fr .5fr .2fr;
+  flex: .5 .5 22rem;
+  overflow: scroll;
   justify-content: center;
+  border-radius: .5% 3% 1% 3%;
   padding: 8px;
+  background-color: #ffffff;
+  opacity: 0.8;
+  background-image:  linear-gradient(#e8dcbc 2.2px, transparent 2.2px), linear-gradient(90deg, #e8dcbc 2.2px, transparent 2.2px), linear-gradient(#e8dcbc 1.1px, transparent 1.1px), linear-gradient(90deg, #e8dcbc 1.1px, #ffffff 1.1px);
+  background-size: 55px 55px, 55px 55px, 11px 11px, 11px 11px;
+  background-position: -2.2px -2.2px, -2.2px -2.2px, -1.1px -1.1px, -1.1px -1.1px;
+}
+
+.delete {
+  width: fit-content;
+  height: 1.5rem;
+  background-color: #FAEBD7;
+  border: .2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  place-content: center;
+  transition: all .5s ease-in-out;
+}
+
+.delete:hover {
+  background-color: #abcdef;
+  border-radius: 8px;
+  border: none;
+  padding: 6px;
 }
 
 form {
@@ -79,7 +116,7 @@ form {
   grid-template-columns: repeat(1fr, 6);
   width: 20rem;
   gap: 5px;
-  border: 2px solid black;
+  border: 1.5px solid black;
   justify-content: center;
   padding: 1rem 0;
   font-family: 'Times New Roman', Times, serif;
@@ -93,26 +130,15 @@ input, textarea {
   height: 1.2rem;
 }
 
-/* button {
-  height: 1rem;
-  background-color: lightcyan;
-  border: .2px solid black;
-  border-radius: 5px;
-  transition: all .5s ease-in-out;
+#messagetext {
+  height: 3rem;
 }
-
-button:hover {
-  background-color: #abcdef;
-  border-radius: 8px;
-  border: none;
-  padding: 3px;
-} */
 
 .form-submit {
   height: 1.2rem;
   width: 5rem;
   place-self: center;
-  background-color: lightcyan;
+  background-color: #FAEBD7;
   border: .2px solid black;
   border-radius: 5px;
   transition: all .5s ease-in-out;
@@ -122,7 +148,7 @@ button:hover {
   height: 2rem;
   width: 5.2rem;
   font-size: 16px;
-  background-color: #abcdef;
+  background-color: #daaf78;
   border-radius: 8px;
   border: none;
   padding: 3px;
@@ -133,7 +159,7 @@ button:hover {
   bottom: 0;
   width: 100%;
   height: 2.5rem;
-  background-color: lightcyan;
+  background-color: #FAEBD7;
   margin: 0;
   display: flex;
   align-items: center;
@@ -145,13 +171,6 @@ button:hover {
   color: inherit;
   transition: all .5s ease-in-out;
 }
-/* 
-.nav-item {
-  background-color: inherit;
-  border-radius: 5px;
-  padding: 2px;
-  transition: all .5s ease-in-out;
-} */
 
 .footer > a:hover {
   color: #00172e;
