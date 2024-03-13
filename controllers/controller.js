@@ -8,14 +8,10 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  // const allMessages = await Message.find({}, "title text")
-  //   .sort({ title: 1 })
-  //   .populate("text")
-  //   .exec();
-  const allMessages = [
-    { title: "First", text: "text" },
-    { title: "Second", text: "lorem ispum" },
-  ];
+  const allMessages = await Message.find({})
+    .populate("user", "firstName lastName")
+    .sort({ timestamp: -1 })
+    .exec();
 
   res.render("index", {
     title: "The Clubhouse",
@@ -197,6 +193,51 @@ exports.admin_create_post = [
       currentUser.isAdmin = true;
       await currentUser.save();
 
+      res.redirect("/");
+    }
+  }),
+];
+
+exports.message_create_get = (req, res) => {
+  res.render("new-message", {
+    title: "Message",
+  });
+};
+
+exports.message_create_post = [
+  body("title")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Message must have a title")
+    .escape(),
+  body("messagetext")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Message must not be empty")
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("new-message", {
+        title: "Create Message",
+        errors: errors.array(),
+      });
+    } else {
+      if (!req.user) {
+        return res.redirect("/login");
+      }
+      const currentUser = await User.findById(req.user._id);
+      const currentTime = new Date();
+
+      const message = new Message({
+        title: req.body.title,
+        text: req.body.messagetext,
+        user: currentUser,
+        timestamp: currentTime,
+      });
+
+      await message.save();
       res.redirect("/");
     }
   }),
