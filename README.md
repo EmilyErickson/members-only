@@ -19,4 +19,4 @@ This project was built with:
 
 ## Live Page
 
-You can find the live page on Glitch
+You can find the live page on Glitch - <https://curious-experienced-front.glitch.me>
