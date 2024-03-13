@@ -1,5 +1,6 @@
 const passport = require("passport");
 require("dotenv").config();
+const bcrypt = require("bcryptjs");
 
 const User = require("../models/users");
 const Message = require("../models/messages");
@@ -14,7 +15,7 @@ exports.index = asyncHandler(async (req, res, next) => {
     .exec();
 
   res.render("index", {
-    title: "The Clubhouse",
+    title: "Clubhouse",
     allMessages: allMessages,
   });
 });
@@ -62,11 +63,14 @@ exports.signUp_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
+    const salt = 10;
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     const user = new User({
       firstName: req.body.firstname,
       lastName: req.body.lastname,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       isMember: false,
       isAdmin: false,
     });
@@ -98,7 +102,7 @@ exports.login_create_post = (req, res, next) => {
     if (!user) {
       return res.render("login", {
         title: "Login",
-        errors: [info], // Pass error message to view
+        errors: [info],
       });
     }
     req.logIn(user, (err) => {
@@ -146,7 +150,6 @@ exports.member_create_post = [
         return res.status(404).json({ error: "User not found" });
       }
 
-      // Update the user's membership status
       currentUser.isMember = true;
       await currentUser.save();
 
@@ -189,7 +192,6 @@ exports.admin_create_post = [
         return res.status(404).json({ error: "User not found" });
       }
 
-      // Update the user's membership status
       currentUser.isAdmin = true;
       await currentUser.save();
 
@@ -208,13 +210,11 @@ exports.message_create_post = [
   body("title")
     .trim()
     .isLength({ min: 1 })
-    .withMessage("Message must have a title")
-    .escape(),
+    .withMessage("Message must have a title"),
   body("messagetext")
     .trim()
     .isLength({ min: 1 })
-    .withMessage("Message must not be empty")
-    .escape(),
+    .withMessage("Message must not be empty"),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -242,3 +242,11 @@ exports.message_create_post = [
     }
   }),
 ];
+
+exports.delete = asyncHandler(async (req, res, next) => {
+  const messageId = req.params.id;
+
+  await Message.findByIdAndDelete(messageId);
+
+  res.redirect("/");
+});
